@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sri Lanka Weather Analytics Dashboard - Historical weather data analysis from 2010 to 2024 covering precipitation, temperature, and extreme weather events across all districts.">
+    <meta name="theme-color" content="#2563eb">
+    <title>Sri Lanka Weather Analytics Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="dashboard-header" role="banner">
+        <div class="container">
+            <h1>Sri Lanka Weather Analytics</h1>
+            <p class="subtitle">Historical Weather Data Analysis (2010-2024)</p>
+        </div>
+    </header>
+
+    <nav class="dashboard-nav" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <ul class="nav-links" role="menubar">
+                <li role="none">
+                    <a href="#precipitation" class="nav-link active" role="menuitem" aria-current="true">
+                        <span aria-hidden="true">🌧️</span>
+                        <span>Precipitation</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#temperature" class="nav-link" role="menuitem">
+                        <span aria-hidden="true">🌡️</span>
+                        <span>Temperature</span>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="#extreme-weather" class="nav-link" role="menuitem">
+                        <span aria-hidden="true">⚠️</span>
+                        <span>Extreme Weather</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content" class="dashboard-main" role="main">
+        <div class="container">
+            <!-- Precipitation Section -->
+            <section id="precipitation" class="dashboard-section" aria-labelledby="precipitation-title">
+                <h2 id="precipitation-title" class="section-title">Precipitation Analysis</h2>
+                <div class="section-description">
+                    <p>Analysis of precipitation patterns across Sri Lanka's districts from 2010 to 2024. Data shows total precipitation hours and identifies the most precipitous months for each district.</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <article class="card" aria-labelledby="precip-district-chart-title">
+                        <h3 id="precip-district-chart-title" class="card-title">Most Precipitous Month/Season by District</h3>
+                        <div class="chart-container">
+                            <canvas id="precipitationByDistrictChart" role="img" aria-label="Bar chart showing average precipitation hours for the most precipitous month in each district"></canvas>
+                        </div>
+                    </article>
+                    
+                    <article class="card" aria-labelledby="top-districts-chart-title">
+                        <h3 id="top-districts-chart-title" class="card-title">Top 5 Districts by Total Precipitation</h3>
+                        <div class="chart-container">
+                            <canvas id="topDistrictsPrecipitationChart" role="img" aria-label="Horizontal bar chart showing the top 5 districts ranked by total precipitation hours"></canvas>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- District Precipitation Details Table -->
+                <article class="card full-width" aria-labelledby="precip-table-title">
+                    <h3 id="precip-table-title" class="card-title">District Precipitation Details (2010-2024)</h3>
+                    <div class="table-container">
+                        <table class="data-table" id="precipitationTable" aria-describedby="precip-table-desc">
+                            <caption id="precip-table-desc" class="sr-only">Precipitation data showing the most precipitous month, season, and average precipitation hours for each district</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">District</th>
+                                    <th scope="col">Most Precipitous Month</th>
+                                    <th scope="col">Season</th>
+                                    <th scope="col">Avg Precipitation (hrs)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="precipitationTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <div class="stats-row" role="group" aria-label="Precipitation statistics summary">
+                    <div class="stat-card highlight-info">
+                        <span class="stat-value" id="highestPrecipMonth" aria-describedby="highest-precip-month-label">--</span>
+                        <span class="stat-label" id="highest-precip-month-label">Month with Highest Precipitation</span>
+                    </div>
+                    <div class="stat-card highlight-warning">
+                        <span class="stat-value" id="highestPrecipValue" aria-describedby="highest-precip-value-label">--</span>
+                        <span class="stat-label" id="highest-precip-value-label">Total Precipitation Hours</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="avgPrecipHours" aria-describedby="avg-precip-hours-label">--</span>
+                        <span class="stat-label" id="avg-precip-hours-label">Avg Monthly Precipitation (hrs)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Temperature Section -->
+            <section id="temperature" class="dashboard-section" aria-labelledby="temperature-title">
+                <h2 id="temperature-title" class="section-title">Temperature Analysis</h2>
+                <div class="section-description">
+                    <p>Temperature trends and patterns across Sri Lanka from 2010 to 2024. The analysis shows yearly average temperatures and identifies months with exceptionally high mean temperatures (above 30°C).</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <article class="card" aria-labelledby="high-temp-chart-title">
+                        <h3 id="high-temp-chart-title" class="card-title">Percentage of Months with Mean Temp &gt; 30°C</h3>
+                        <div class="chart-container">
+                            <canvas id="highTempMonthsChart" role="img" aria-label="Bar chart showing percentage of months with mean temperature above 30 degrees Celsius per year"></canvas>
+                        </div>
+                    </article>
+                    
+                    <article class="card" aria-labelledby="temp-trends-chart-title">
+                        <h3 id="temp-trends-chart-title" class="card-title">Temperature Trends Over Time</h3>
+                        <div class="chart-container">
+                            <canvas id="temperatureTrendsChart" role="img" aria-label="Line chart showing average maximum and mean temperature trends from 2010 to 2024"></canvas>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="stats-row" role="group" aria-label="Temperature statistics summary">
+                    <div class="stat-card highlight-danger">
+                        <span class="stat-value" id="avgHighTemp" aria-describedby="avg-high-temp-label">--</span>
+                        <span class="stat-label" id="avg-high-temp-label">Average Max Temperature (°C)</span>
+                    </div>
+                    <div class="stat-card highlight-warning">
+                        <span class="stat-value" id="hottestDistrict" aria-describedby="hottest-district-label">--</span>
+                        <span class="stat-label" id="hottest-district-label">Hottest District</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="highTempMonthsPct" aria-describedby="high-temp-pct-label">--</span>
+                        <span class="stat-label" id="high-temp-pct-label">% Months Above 30°C</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Extreme Weather Section -->
+            <section id="extreme-weather" class="dashboard-section" aria-labelledby="extreme-weather-title">
+                <h2 id="extreme-weather-title" class="section-title">Extreme Weather Events</h2>
+                <div class="section-description">
+                    <p>Analysis of extreme weather events characterized by high precipitation combined with high wind gusts. An extreme weather day is defined as having <strong>precipitation &gt; 10mm</strong> AND <strong>wind gusts &gt; 50 km/h</strong>.</p>
+                </div>
+
+                <!-- Threshold Info Card -->
+                <div class="threshold-info-card" role="note" aria-label="Extreme weather threshold definition">
+                    <div class="threshold-item">
+                        <span class="threshold-icon" aria-hidden="true">🌧️</span>
+                        <span class="threshold-text">Precipitation &gt; 10mm</span>
+                    </div>
+                    <span class="threshold-separator" aria-hidden="true">AND</span>
+                    <span class="sr-only">and</span>
+                    <div class="threshold-item">
+                        <span class="threshold-icon" aria-hidden="true">💨</span>
+                        <span class="threshold-text">Wind Gusts &gt; 50 km/h</span>
+                    </div>
+                </div>
+                
+                <div class="cards-grid">
+                    <article class="card" aria-labelledby="extreme-year-chart-title">
+                        <h3 id="extreme-year-chart-title" class="card-title">Extreme Weather Days by Year</h3>
+                        <div class="chart-container">
+                            <canvas id="extremeWeatherByYearChart" role="img" aria-label="Bar chart showing number of extreme weather days per year from 2010 to 2024"></canvas>
+                        </div>
+                    </article>
+                    
+                    <article class="card" aria-labelledby="extreme-district-chart-title">
+                        <h3 id="extreme-district-chart-title" class="card-title">Extreme Weather Distribution by District (Top 10)</h3>
+                        <div class="chart-container">
+                            <canvas id="extremeWeatherByDistrictChart" role="img" aria-label="Doughnut chart showing distribution of extreme weather days across top 10 affected districts"></canvas>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="stats-row" role="group" aria-label="Extreme weather statistics summary">
+                    <div class="stat-card highlight-warning">
+                        <span class="stat-value" id="totalExtremeDays" aria-describedby="total-extreme-label">--</span>
+                        <span class="stat-label" id="total-extreme-label">Total Extreme Weather Days</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="avgExtremePerYear" aria-describedby="avg-extreme-label">--</span>
+                        <span class="stat-label" id="avg-extreme-label">Avg Extreme Days/Year</span>
+                    </div>
+                    <div class="stat-card highlight-danger">
+                        <span class="stat-value" id="mostAffectedDistrict" aria-describedby="most-affected-label">--</span>
+                        <span class="stat-label" id="most-affected-label">Most Affected District</span>
+                    </div>
+                </div>
+
+                <!-- Extreme Weather Details Table -->
+                <article class="card full-width" aria-labelledby="extreme-table-title">
+                    <h3 id="extreme-table-title" class="card-title">Top 10 Districts by Extreme Weather Days (2010-2024)</h3>
+                    <div class="table-container">
+                        <table class="data-table" id="extremeWeatherTable" aria-describedby="extreme-table-desc">
+                            <caption id="extreme-table-desc" class="sr-only">Ranking of top 10 districts by number of extreme weather days with severity indicators</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">District</th>
+                                    <th scope="col">Extreme Weather Days</th>
+                                    <th scope="col">% of Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="extremeWeatherTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer class="dashboard-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2024 Sri Lanka Weather Analytics Platform</p>
+            <p class="footer-note">Data source: Historical weather data (2010-2024)</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

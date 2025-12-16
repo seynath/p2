@@ -1,0 +1,39 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Kiro
+.kiro/
+
+# Python virtual environment
+spark/venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Java/Maven build output
+mapreduce/target/
+
+# Spark/Hive metadata
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Deliverables (generated zip files)
+deliverables/*.zip
+
+# Logs
+*.log
+logs/
