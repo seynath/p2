@@ -16,16 +16,19 @@ This document presents the implementation and results of batch processing analyt
 
 ```
 District          Month   Year    Total Precipitation    Mean Temperature
--------------------------------------------------------------------------
-Gampaha           2       2023    30.00 hours           mean_temp=25.00°C
-Colombo           3       2023    24.00 hours           mean_temp=30.00°C
-Ratnapura         6       2023    18.50 hours           mean_temp=27.45°C
-Kandy             10      2023    10.20 hours           mean_temp=24.82°C
-Nuwara Eliya      7       2023    12.30 hours           mean_temp=15.23°C
+------------------------------------------------------------------------------------------
+Colombo           1       2023    113.00 hours           mean_temp=25.18°C
+Gampaha           2       2023    117.00 hours           mean_temp=25.79°C
+Ratnapura         6       2023    573.00 hours           mean_temp=25.94°C
+Kandy             10      2023    328.00 hours           mean_temp=23.41°C
+Nuwara Eliya      7       2023    393.00 hours           mean_temp=15.36°C
+Polonnaruwa       4       2023    116.00 hours           mean_temp=28.05°C
+Jaffna            3       2023    119.00 hours           mean_temp=27.81°C
+Trincomalee       5       2023    110.00 hours           mean_temp=28.77°C
 ...
 ```
 
-**Key Finding:** Ratnapura has the highest total precipitation across the dataset, while Polonnaruwa shows the highest mean temperatures during April.
+**Key Finding:** Ratnapura has the highest total precipitation across the dataset (62,920 hours), while Jaffna shows the highest mean temperatures during April.
 
 #### Code Listing: PrecipitationMapper.java
 
@@ -585,8 +588,12 @@ LIMIT 10;
 | Hambantota | 4.37 |
 | Jaffna | 4.31 |
 | Mullaitivu | 4.27 |
+| Kilinochchi | 4.26 |
 | Trincomalee | 4.20 |
+| Puttalam | 4.02 |
 | Polonnaruwa | 4.01 |
+| Matara | 3.96 |
+| Vavuniya | 3.96 |
 | ... | ... |
 | Nuwara Eliya | 3.15 |
 
@@ -599,10 +606,15 @@ LIMIT 10;
 | Kilinochchi | 5.66 |
 | Mullaitivu | 5.62 |
 | Mannar | 5.29 |
+| Jaffna | 5.20 |
+| Vavuniya | 5.18 |
+| Batticaloa | 5.03 |
+| Hambantota | 4.95 |
+| Ampara | 4.87 |
 | ... | ... |
 | Nuwara Eliya | 3.23 |
 
-**Interpretation:** Yala season shows higher evapotranspiration rates due to higher temperatures and solar radiation. Coastal and dry zone districts have higher ET0 values, while hill country districts (Nuwara Eliya) have the lowest.
+**Interpretation:** Yala season shows higher evapotranspiration rates due to higher temperatures and solar radiation. Polonnaruwa has the highest Yala ET0 (5.71 mm), while Nuwara Eliya has the lowest across both seasons (~3.2 mm).
 
 #### Code Listing: seasonal_evapotranspiration.hql
 
